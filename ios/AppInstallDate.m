@@ -13,7 +13,8 @@ RCT_REMAP_METHOD(getInstallDateTime,
 {
     NSURL* urlToDocumentsFolder = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
   __autoreleasing NSError *error;
-  NSDate *installDate = [[[NSFileManager defaultManager] attributesOfItemAtPath:NSBundle.mainBundle().bundlePath error:&error] objectForKey:NSFileCreationDate];
+  NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath]
+  NSDate *installDate = [[[NSFileManager defaultManager] attributesOfItemAtPath:mainBundlePath error:&error] objectForKey:NSFileCreationDate];
   
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   [dateFormatter setDateFormat:format];
@@ -30,7 +31,8 @@ RCT_REMAP_METHOD(getUpdateDateTime,
 {
     NSURL* urlToDocumentsFolder = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
   __autoreleasing NSError *error;
-  NSDate *updateDate = [[[NSFileManager defaultManager] attributesOfItemAtPath:NSBundle.mainBundle().bundlePath error:&error] objectForKey:NSFileModificationDate];
+  NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath]
+  NSDate *updateDate = [[[NSFileManager defaultManager] attributesOfItemAtPath:mainBundlePath error:&error] objectForKey:NSFileModificationDate];
   
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   [dateFormatter setDateFormat:format];
