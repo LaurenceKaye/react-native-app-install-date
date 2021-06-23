@@ -18,11 +18,24 @@ class AppInstallDateModule(reactContext: ReactApplicationContext) : ReactContext
     // Example method
     // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
-    fun getDateTime(format: String = "MM/dd/yyyy hh:mm:ss", promise: Promise) {
+    fun getInstallDateTime(format: String = "MM/dd/yyyy hh:mm:ss", promise: Promise) {
       try{
             var installedTime: Long = reactApplicationContext.getPackageManager().getPackageInfo(reactApplicationContext.getPackageName(),0).firstInstallTime;
 
             var dateString: String = DateFormat.format(format, Date(installedTime)).toString();
+
+            promise.resolve(dateString)
+        }catch(e: PackageManager.NameNotFoundException){
+            e.printStackTrace();
+        }
+    }
+
+    @ReactMethod
+    fun getUpdateDateTime(format: String = "MM/dd/yyyy hh:mm:ss", promise: Promise) {
+      try{
+            var updatedTime: Long = reactApplicationContext.getPackageManager().getPackageInfo(reactApplicationContext.getPackageName(),0).lastUpdateTime;
+
+            var dateString: String = DateFormat.format(format, Date(updatedTime)).toString();
 
             promise.resolve(dateString)
         }catch(e: PackageManager.NameNotFoundException){

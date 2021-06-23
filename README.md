@@ -19,7 +19,8 @@ import AppInstallDate from 'react-native-app-install-date';
 
 // ...
 
-const result = await AppInstallDate.getDateTime(format);
+const result = await AppInstallDate.getInstallDateTime(format);
+const result = await AppInstallDate.getUpdateDateTime(format);
 ```
 
 ## Contributing
