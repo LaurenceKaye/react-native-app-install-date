@@ -1,6 +1,6 @@
 {
   "name": "react-native-app-install-date",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Get the install date of app",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
