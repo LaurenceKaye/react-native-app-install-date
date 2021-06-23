@@ -7,7 +7,7 @@ RCT_EXPORT_MODULE()
 // Example method
 // See // https://reactnative.dev/docs/native-modules-ios
 RCT_REMAP_METHOD(getInstallDateTime,
-                 getDateTimeWithFormat:(nonnull NSString*)format
+                 getInstallDateTimeWithFormat:(nonnull NSString*)format
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
 {
@@ -23,21 +23,21 @@ RCT_REMAP_METHOD(getInstallDateTime,
   resolve(stringDate);
 }
 
-// RCT_REMAP_METHOD(getUpdateDateTime,
-//                  getDateTimeWithFormat:(nonnull NSString*)format
-//                  withResolver:(RCTPromiseResolveBlock)resolve
-//                  withRejecter:(RCTPromiseRejectBlock)reject)
-// {
-//     NSURL* urlToDocumentsFolder = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-//   __autoreleasing NSError *error;
-//   NSDate *updateDate = [[[NSFileManager defaultManager] attributesOfItemAtPath:urlToDocumentsFolder.path error:&error] objectForKey:NSFileModificationDate];
+RCT_REMAP_METHOD(getUpdateDateTime,
+                 getUpdateDateTimeWithFormat:(nonnull NSString*)format
+                 withResolver:(RCTPromiseResolveBlock)resolve
+                 withRejecter:(RCTPromiseRejectBlock)reject)
+{
+    NSURL* urlToDocumentsFolder = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+  __autoreleasing NSError *error;
+  NSDate *updateDate = [[[NSFileManager defaultManager] attributesOfItemAtPath:urlToDocumentsFolder.path error:&error] objectForKey:NSFileModificationDate];
   
-//   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//   [dateFormatter setDateFormat:format];
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setDateFormat:format];
   
-//   NSString *stringDate = [dateFormatter stringFromDate:updateDate];
+  NSString *stringDate = [dateFormatter stringFromDate:updateDate];
 
-//   resolve(stringDate);
-// }
+  resolve(stringDate);
+}
 
 @end
